@@ -12,9 +12,6 @@
 修改會員
 * API路徑定義 xxx@host/api/users/update 
 
-上述請以 @valid 及 regular expression 做基本檢查
-
-
 ## 進階需求
 以 redis 做快取效能優化 ( redission libary )
 

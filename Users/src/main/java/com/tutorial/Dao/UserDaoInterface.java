@@ -2,9 +2,14 @@ package com.tutorial.Dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.tutorial.Model.UserAccount;
 
 public interface UserDaoInterface{
+
+	int count(); 
 	
 	void addMember(UserAccount userAccount);
 	
@@ -12,5 +17,8 @@ public interface UserDaoInterface{
 
 	List<UserAccount> findByPhone(String phone);
 
-	void updateMember(UserAccount userAccount); 
+	void updateMember(UserAccount userAccount);
+
+	Page<UserAccount> findAllByPhone(Pageable page, String phone);
+
 }

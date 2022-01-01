@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,14 +62,30 @@ public class UserApiController {
 //	}
 
 	
+//	// Search User by enter Phone Number Jdbc
+//	@GetMapping("/user/page")
+//	public String page(Model model1, @Param("keyword") String keyword) {
+//		List<UserAccount> listUsers = userService.findByPhone(keyword);
+//		model1.addAttribute("listUsers", listUsers);
+//		model1.addAttribute("keyword", keyword);
+//		return "page";
+//	}
+	
 	// Search User by enter Phone Number Jdbc
 	@GetMapping("/user/page")
-	public String page(Model model1, @Param("keyword") String keyword) {
-		List<UserAccount> listUsers = userService.findByPhone(keyword);
-		model1.addAttribute("listUsers", listUsers);
+	public String page(Model model1, @Param("keyword") String keyword, @Param("pageSize") String pageSize) {
+		//pageRequest.of( [cur_page] , [numPerPage] )
+		PageRequest pageable = PageRequest.of(0, 5);
+		//pageable = PageRequest.of(0, pageSize);
+		Page<UserAccount> pagedUsers = userService.findAllByPhone(pageable,keyword);
+		model1.addAttribute("listUsers", pagedUsers);
 		model1.addAttribute("keyword", keyword);
+		model1.addAttribute("pageSize",pageSize);
+		
+		//Need to ask how to put pageSize inside pageRequest without being null value
 		return "page";
 	}
+
 
 	// Update using get and post
 	@GetMapping("/user/update")

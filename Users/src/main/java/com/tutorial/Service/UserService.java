@@ -3,6 +3,8 @@ package com.tutorial.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.tutorial.Dao.UserDao;
@@ -27,6 +29,11 @@ public class UserService {
 	//Find by Phone
 	public List<UserAccount> findByPhone(String phone) {
 		return userDao.findByPhone(phone);
+	}
+	
+	//Find All by Phone
+	public Page<UserAccount> findAllByPhone(Pageable page, String phone) {
+		return userDao.findAllByPhone(page, phone);
 	}
 	
 	//Update Member

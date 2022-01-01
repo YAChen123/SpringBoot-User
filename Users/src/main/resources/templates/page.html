@@ -20,9 +20,12 @@
     <form th:action="@{/user/page/}" method="GET">
         <lablel>Enter Phone Number</lablel>
         <input type="text" name="keyword" required>
+        <label>Page Size</label>
+        <input type="text" name="pageSize">
         <input type="submit" value="Search">
     </form>
-    <h3>The phone number: [[${keyword}]]</h1>
+    <h3>The phone number: [[${keyword}]]</h3>
+    <h3>The Page size: [[${pageSize}]]</h3>
     <table class="table">
             <thead>
               <tr>
